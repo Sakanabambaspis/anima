@@ -1,4 +1,4 @@
-# Imago configuration. Everything behavioral is declarative: remove a plugin
+# Anima configuration. Everything behavioral is declarative: remove a plugin
 # from the lists below and its capability disappears (the subtraction test).
 
 [model]
@@ -23,7 +23,7 @@ profile = "imperative"                # prompt voice; see profiles/
 prompt_modules = ["persona", "fewshot", "constitution"]
 hooks = ["reinject", "reanchor"]
 reinject_every_k_turns = 10           # provisional, spec-stance §3
-verdict_marker = true                 # show "[imago: ...]" verdict lines in chat
+verdict_marker = true                 # show "[anima: ...]" verdict lines in chat
 
 [judge]
 # Judges are the same model by design (single-model two-pass arbitration).

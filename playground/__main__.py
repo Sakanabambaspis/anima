@@ -4,7 +4,7 @@
     python -m playground --list                   list known sessions
 
 Run from the repo root: sessions live under the config's runs_dir, same as
-`imago` itself. A turn is recorded as a `playground_user` event before the
+`anima` itself. A turn is recorded as a `playground_user` event before the
 call and a `playground_reply` event after, so resume replays the real
 conversation — including hold-rewrites the stance loop substitutes for the
 draft — from the session's own event log.
@@ -15,7 +15,7 @@ from __future__ import annotations
 import argparse
 from pathlib import Path
 
-from imago.core.config import load_config, load_dotenv
+from anima.core.config import load_config, load_dotenv
 
 from .sessions import list_sessions, open_session, turn
 
@@ -61,7 +61,7 @@ def main(argv=None):
             if text in ("/quit", "/exit"):
                 break
             reply = turn(host, log, text)
-            print(f"imago> {reply}\n")
+            print(f"anima> {reply}\n")
     except (EOFError, KeyboardInterrupt):
         pass
     print(f"session log: {log.path}")

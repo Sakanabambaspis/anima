@@ -15,7 +15,7 @@ uncompiled window must be covered by a day file.
 
 - `scripts/journal_audit.py` (stdlib only), modes:
   - `--dump`: print uncompiled raw lines (per cursor in
-    `.imago/journal/state.json`) as readable text for the digest agent.
+    `.anima/journal/state.json`) as readable text for the digest agent.
   - default: validate day files for every date with uncompiled data —
     header lines present; `Sessions:` covers every session id in pending
     raw; every rationale blockquote (whitespace-normalized, trailing `…`
@@ -50,4 +50,4 @@ emptiness check tested the wrong dict.
 
 ## Migrated
 
-Imported as GitHub issue #17 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #17 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

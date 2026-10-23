@@ -29,4 +29,4 @@ conversation ("the weakness I named is now measured").
 
 ## Migrated
 
-Imported as GitHub issue #9 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #9 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

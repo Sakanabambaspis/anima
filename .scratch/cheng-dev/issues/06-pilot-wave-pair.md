@@ -13,8 +13,8 @@ note (design-mvp §2, criterion 3) and the email's strongest single sentence.
 ## What
 
 ```bash
-.venv/bin/imago eval p1 --wave pilot --loop plain    # baseline arm
-.venv/bin/imago eval p1 --wave pilot --loop stance   # countermeasure arm
+.venv/bin/anima eval p1 --wave pilot --loop plain    # baseline arm
+.venv/bin/anima eval p1 --wave pilot --loop stance   # countermeasure arm
 ```
 
 On the committed `config.toml`, re-pinned to `glm-4-flash` (per ticket 05's
@@ -34,10 +34,10 @@ argument that justifies the work.
 - Two wave JSONs in `docs/results/`, real `model_version`, provisional note
   present (`pilot < 100 runs`), committed (results data gets its own commit
   per AGENTS.md).
-- `imago metrics --last` summary eyeballed: judge/task/probe economics of
+- `anima metrics --last` summary eyeballed: judge/task/probe economics of
   the pair noted — that number feeds the email's economics paragraph.
 
 
 ## Migrated
 
-Imported as GitHub issue #7 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #7 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

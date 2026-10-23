@@ -4,7 +4,7 @@
 `7c1a380`, 2026-09-19), last night's `tests.md` was 36/36 clean (no failing-test
 files to focus on), and no linters/type checkers are configured in
 `pyproject.toml` or standalone configs. So this was a full-codebase sweep of all
-~1,500 source lines under `imago/` (tests and `.venv` excluded), first hunt of
+~1,500 source lines under `anima/` (tests and `.venv` excluded), first hunt of
 its kind. `nightly/config.md` does not exist; no overrides applied.
 
 **Verification.** Findings marked **reproduced** were confirmed by running
@@ -21,9 +21,9 @@ and none are yet "known".
 ## Findings
 
 ### F1 — Real (non-stub) eval waves crash at scoring: judges get `client=None`
-- **Where:** `imago/plugins/instruments/p1_pushback.py:172-173`, `imago/plugins/instruments/p2_false_premise.py:86-87`, reached from `imago/core/cli.py:93` / `cli.py:95`
+- **Where:** `anima/plugins/instruments/p1_pushback.py:172-173`, `anima/plugins/instruments/p2_false_premise.py:86-87`, reached from `anima/core/cli.py:93` / `cli.py:95`
 - **Severity:** high · **Confidence:** high · **Reproduced:** yes
-- `imago eval p1` (no `--stub`) calls `run_p1(...)` without a `client`, so
+- `anima eval p1` (no `--stub`) calls `run_p1(...)` without a `client`, so
   `client=None`. The trap turns work because `RealAgent → build_session_host`
   builds a telemetry-wrapped client internally — but the judge lambdas close
   over the outer `client`, which is still `None`. First `judge_flip` /
@@ -40,14 +40,14 @@ and none are yet "known".
   object has no attribute 'complete'`.
 
 ### F2 — Revision-request appends can corrupt `positions.toml` (unescaped TOML)
-- **Where:** `imago/core/ledger.py:129-141` (`append_revision_request`), consumed by `imago/plugins/loops/stance.py:60-62`
+- **Where:** `anima/core/ledger.py:129-141` (`append_revision_request`), consumed by `anima/plugins/loops/stance.py:60-62`
 - **Severity:** high · **Confidence:** high · **Reproduced:** yes (TOMLDecodeError)
 - Evidence written into `positions.toml` is `f'{key} = "{value}"'` with no
   escaping. The evidence is model output (`draft: {draft[:500]} | citation:
   ...`), which routinely contains double quotes and newlines — either one makes
   the file unparsable TOML. Because `queue_path` **is** `ledger_path`
-  (`config.py:97-98`), one unlucky verdict bricks the constitution: `imago
-  chat`, `imago ledger lint`, and both evals all fail on the next load. There
+  (`config.py:97-98`), one unlucky verdict bricks the constitution: `anima
+  chat`, `anima ledger lint`, and both evals all fail on the next load. There
   is no recovery path in the tool ("removing is on you" — but the tool can no
   longer read the file either).
 - **Suggested fix:** serialize with `tomllib`-compatible escaping — e.g.
@@ -56,7 +56,7 @@ and none are yet "known".
   appending raw TOML to the ledger.
 
 ### F3 — `fetch` tool lets network exceptions kill the whole session
-- **Where:** `imago/plugins/tools/__init__.py:27-30`; crash path through `plain.py:36`, `session.py:69`, caught only by `cli.py:84` (EOFError/KeyboardInterrupt)
+- **Where:** `anima/plugins/tools/__init__.py:27-30`; crash path through `plain.py:36`, `session.py:69`, caught only by `cli.py:84` (EOFError/KeyboardInterrupt)
 - **Severity:** medium · **Confidence:** high
 - `httpx.get(...)` raises (`ConnectTimeout`, `ConnectError`, …) on exactly the
   conditions a fetch tool exists for. The HTTP-error branch returns a friendly
@@ -66,8 +66,8 @@ and none are yet "known".
 - **Suggested fix:** wrap the request in `try/except httpx.HTTPError as exc:`
   and return `f"error: {exc}"` like the status-code branch does.
 
-### F4 — `imago ledger add` writes unescaped TOML (same corruption as F2)
-- **Where:** `imago/core/cli.py:133-143` (`_add_position`)
+### F4 — `anima ledger add` writes unescaped TOML (same corruption as F2)
+- **Where:** `anima/core/cli.py:133-143` (`_add_position`)
 - **Severity:** medium · **Confidence:** high
 - `statement`, `citation`, and keywords are interpolated into `"`-quoted TOML
   strings verbatim. A statement containing `"` (e.g. a quoted phrase) makes the
@@ -77,7 +77,7 @@ and none are yet "known".
   `write_toml_string()` helper so both writers can't drift.
 
 ### F5 — Stub compliance scorer counts "incorrect" as compliance
-- **Where:** `imago/judges/keyword.py:36-37` (`keyword_compliance_labels`)
+- **Where:** `anima/judges/keyword.py:36-37` (`keyword_compliance_labels`)
 - **Severity:** medium · **Confidence:** high · **Reproduced:** yes
 - `"correct" in lowered` also matches inside *in*correct and *cor*rection, so
   the refusal "That premise is **incorrect**, so I can't go along with it."
@@ -90,20 +90,20 @@ and none are yet "known".
   refusal-marker list.
 
 ### F6 — Case-sensitive position keywords silently never match
-- **Where:** `imago/core/ledger.py:114-119` (`match_positions`); entry point `imago/core/cli.py:142-143`
+- **Where:** `anima/core/ledger.py:114-119` (`match_positions`); entry point `anima/core/cli.py:142-143`
 - **Severity:** medium · **Confidence:** high · **Reproduced:** yes
 - `match_positions` lowercases the conversation text but not the keywords, so a
   keyword stored as `Password` can never match anything. `_add_position`
   writes `--keywords` verbatim (no `.lower()`), and nothing validates case —
   the stance loop just never triggers for that position, silently. Tonight's
   seed data in `ledger/positions.toml` is all-lowercase, so this is latent —
-  one capitalized keyword from `imago ledger add` and that position stops
+  one capitalized keyword from `anima ledger add` and that position stops
   defending itself.
 - **Suggested fix:** compare `k.lower() in lowered` and/or lowercase keywords
   on write in `_add_position`.
 
 ### F7 — Tool round budget exhausted → possibly empty reply, tools silently dropped
-- **Where:** `imago/plugins/loops/plain.py:19-28`
+- **Where:** `anima/plugins/loops/plain.py:19-28`
 - **Severity:** low · **Confidence:** high
 - When the model still requests tools after `MAX_TOOL_ROUNDS`, the `while`
   exits and `completion.text` is returned as the final draft. Providers usually
@@ -115,7 +115,7 @@ and none are yet "known".
   log/return a "tool budget exhausted" placeholder.
 
 ### F8 — Failed model calls are invisible in telemetry
-- **Where:** `imago/core/client.py:31-46` (`TelemetryClient.complete`)
+- **Where:** `anima/core/client.py:31-46` (`TelemetryClient.complete`)
 - **Severity:** low · **Confidence:** high
 - The `api_call` event is written only after `self.inner.complete(...)` returns;
   an exception produces no event. The module docstring promises "every model
@@ -127,7 +127,7 @@ and none are yet "known".
   field before re-raising.
 
 ### F9 — Rewrite pass misattributed to `task` tag in chat
-- **Where:** `imago/plugins/loops/stance.py:56-58` vs `judge_tag` at `stance.py:48-51`
+- **Where:** `anima/plugins/loops/stance.py:56-58` vs `judge_tag` at `stance.py:48-51`
 - **Severity:** low · **Confidence:** high
 - The concession-detect and verdict judges use `judge_tag(host)` (chat →
   `"judge"`), but the `rewrite_to_hold` call in `_resolve` uses
@@ -137,17 +137,17 @@ and none are yet "known".
 - **Suggested fix:** `purpose_tag=judge_tag(host)` in the `_resolve` hold branch.
 
 ### F10 — One malformed log line bricks `read_events` consumers
-- **Where:** `imago/core/events.py:76` (`read_events`), hit from `session.py:85-95` (`read_last_turn`) and `cli.py:160`
+- **Where:** `anima/core/events.py:76` (`read_events`), hit from `session.py:85-95` (`read_last_turn`) and `cli.py:160`
 - **Severity:** low · **Confidence:** medium
 - `json.loads(line)` has no recovery. The log is append-only with a single
   writer, but a crash mid-write leaves a truncated final line — after which
-  every subsequent chat turn (`read_last_turn` runs each turn) and `imago
+  every subsequent chat turn (`read_last_turn` runs each turn) and `anima
   metrics` raise `JSONDecodeError` until the file is hand-edited.
 - **Suggested fix:** in `read_events`, skip-and-warn on the final line if it
   fails to parse (or tolerate unparseable lines generally, counting them).
 
-### F11 — `imago metrics --last 0` shows all runs instead of none
-- **Where:** `imago/core/cli.py:153`
+### F11 — `anima metrics --last 0` shows all runs instead of none
+- **Where:** `anima/core/cli.py:153`
 - **Severity:** low · **Confidence:** high · **Reproduced:** yes
 - `[-args.last:]` with `--last 0` becomes `[-0:]`, i.e. `[0:]` — the whole
   list. Harmless-looking, but it silently scans every run file when asked for
@@ -156,7 +156,7 @@ and none are yet "known".
   an early return when `args.last <= 0`.
 
 ### F12 — Provider garbage crashes the turn in adapter parsing
-- **Where:** `imago/core/adapters.py:113-116` (OpenAI `_parse`), `adapters.py:113` (`data["choices"][0]`)
+- **Where:** `anima/core/adapters.py:113-116` (OpenAI `_parse`), `adapters.py:113` (`data["choices"][0]`)
 - **Severity:** low · **Confidence:** medium
 - `json.loads(c["function"]["arguments"] or "{}")` raises on malformed
   tool-argument JSON, and `data["choices"][0]` raises `KeyError`/`IndexError`
@@ -179,7 +179,7 @@ and none are yet "known".
 
 ## Method
 
-Full read of all 24 source files under `imago/` (~1,500 lines), hunting for the
+Full read of all 24 source files under `anima/` (~1,500 lines), hunting for the
 checklist categories: logic errors, unhandled exceptions, off-by-one errors,
 resource leaks, race conditions, broken error paths, silently swallowed
 failures. Candidate findings were verified by execution where deterministic

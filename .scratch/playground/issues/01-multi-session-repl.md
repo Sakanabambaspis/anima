@@ -9,27 +9,27 @@ forward if real-path debugging in cheng-dev 05/06 needs interactive repro.
 ## Context
 
 `.scratch/playground/spec.md` — R&D tool, independent of the product. The
-product's only interactive surface today is `imago chat` (one session per
+product's only interactive surface today is `anima chat` (one session per
 invocation); debugging judge behavior and prompt modules by hand currently
 means juggling config files and terminals.
 
 ## What
 
-- Build a small entry point (top-level `playground/`, outside `imago/`) that:
+- Build a small entry point (top-level `playground/`, outside `anima/`) that:
   - lists, creates, and resumes named chat sessions (identity anchored on the
     existing event log + `run_id`; no second storage layer);
-  - launches each session through `imago.core.host_factory.build_session_host`
+  - launches each session through `anima.core.host_factory.build_session_host`
     with a config chosen per session — system prompt modules, profile, loop,
     and tools exactly as `config.toml` expresses them;
   - is otherwise dumb: no plugin system of its own, no GUI, no scoring.
 - Constraint check: `tests/test_subtraction.py` still passes with zero
-  `imago/` changes; `git grep playground imago/` finds nothing.
+  `anima/` changes; `git grep playground anima/` finds nothing.
 
 ## Done when
 
 - One command starts a named session; a second invocation with the same name
   resumes it; two sessions can hold different configs (e.g. plain vs stance).
-- Suite green; subtraction test untouched; no diffs under `imago/`.
+- Suite green; subtraction test untouched; no diffs under `anima/`.
 
 ## Comments
 
@@ -42,12 +42,12 @@ means juggling config files and terminals.
   included); crashed turns drop on replay; stored config path wins on
   resume, explicit mismatch is a hard error. Known v1 losses (in spec's
   spirit): pending injections and past reminder blocks don't survive
-  resume. Verified: 45/45 green; `git grep playground imago/` empty; no
-  diffs under `imago/`; smoke create/list/resume + one REAL model turn
+  resume. Verified: 45/45 green; `git grep playground anima/` empty; no
+  diffs under `anima/`; smoke create/list/resume + one REAL model turn
   end-to-end (draft → reply logged; the stance gate correctly stayed quiet
   on a non-constitution turn).
 
 
 ## Migrated
 
-Imported as GitHub issue #2 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #2 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

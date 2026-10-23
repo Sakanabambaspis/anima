@@ -32,4 +32,4 @@ instrument path with `stub=None`:
 
 ## Migrated
 
-Imported as GitHub issue #4 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #4 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

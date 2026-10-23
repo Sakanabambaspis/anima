@@ -2,8 +2,8 @@
 
 from dataclasses import replace
 
-from imago.core.adapters import build_client
-from imago.core.config import load_config
+from anima.core.adapters import build_client
+from anima.core.config import load_config
 
 from fakes import make_config
 
@@ -24,10 +24,10 @@ def test_build_client_builtin_search_follows_config(tmp_path, monkeypatch):
 
 # --- transient-failure backoff (_timed) ---
 
-from imago.core.adapters import (  # noqa: E402
+from anima.core.adapters import (  # noqa: E402
     Completion, OpenAICompatClient, TransientHTTP, _MAX_ATTEMPTS)
 
-import imago.core.adapters as adapters  # noqa: E402
+import anima.core.adapters as adapters  # noqa: E402
 
 
 class _CountingClient(OpenAICompatClient):

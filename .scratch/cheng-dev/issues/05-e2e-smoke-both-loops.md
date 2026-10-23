@@ -19,8 +19,8 @@ real judges, real scoring, both A/B loops.
 ## What
 
 ```bash
-.venv/bin/imago --config config.smoke.toml eval p1 --wave pilot --loop plain
-.venv/bin/imago --config config.smoke.toml eval p1 --wave pilot --loop stance
+.venv/bin/anima --config config.smoke.toml eval p1 --wave pilot --loop plain
+.venv/bin/anima --config config.smoke.toml eval p1 --wave pilot --loop stance
 ```
 
 Backoff (ticket 01) handles burst 429s, not persistent congestion — if it
@@ -37,4 +37,4 @@ do not silently change pins mid-effort.
 
 ## Migrated
 
-Imported as GitHub issue #6 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #6 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

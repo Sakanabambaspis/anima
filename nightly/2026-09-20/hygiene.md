@@ -4,7 +4,7 @@
 
 ## (5) Build / entry-point spot-check — PASS
 - `ast.parse`d all **42** project `.py` files (excluding `.venv/` and `nightly/`): **0 syntax failures**.
-- CLI entry point `imago.core.cli:main` imports under `.venv/bin/python` with `PYTHONDONTWRITEBYTECODE=1`; `main` is callable.
+- CLI entry point `anima.core.cli:main` imports under `.venv/bin/python` with `PYTHONDONTWRITEBYTECODE=1`; `main` is callable.
 - Nothing suddenly fails, so no urgent findings this morning.
 
 ## (1) Archive rotation — nothing to do
@@ -17,12 +17,12 @@
 ## (3) Gitignored cleanup — 384 KB freed
 Deleted (regenerable caches only):
 - `.pytest_cache/` — 32 KB
-- 10 × `__pycache__/` under `imago/` and `tests/` — 352 KB
+- 10 × `__pycache__/` under `anima/` and `tests/` — 352 KB
 
 Deliberately left alone despite being gitignored — not build artifacts or caches:
 - `.env` / `.env.*` — secrets
 - `.venv/` — Python environment (would force a full reinstall)
-- `.imago/` — application runtime data
+- `.anima/` — application runtime data
 
 No `dist/` or `*.egg-info/` present.
 

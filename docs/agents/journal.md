@@ -10,8 +10,8 @@ to preserve prompts mechanically and force the compiled layer to quote them.
 
 | Layer | Location | Writer | Rules |
 |---|---|---|---|
-| Raw evidence | `.imago/journal/raw/YYYY-MM-DD.jsonl` (gitignored, local-only) | only `scripts/journal_hook.py`, via ZCode hooks (`UserPromptSubmit` → `prompt` events, `Stop` → `turn_end` events) | append-only, never edited by anyone; one JSON line per event; `prompt` field is the owner's words verbatim; `payload_echo` preserves whatever the hook received |
-| Compiled journal | `journal/YYYY-MM/YYYY-MM-DD.md` (`journal/` is its own git repo → private GitHub remote) | only the `imago-journal-digest` scheduled agent, per this contract | quote-don't-paraphrase (audited), past day files immutable |
+| Raw evidence | `.anima/journal/raw/YYYY-MM-DD.jsonl` (gitignored, local-only) | only `scripts/journal_hook.py`, via ZCode hooks (`UserPromptSubmit` → `prompt` events, `Stop` → `turn_end` events) | append-only, never edited by anyone; one JSON line per event; `prompt` field is the owner's words verbatim; `payload_echo` preserves whatever the hook received |
+| Compiled journal | `journal/YYYY-MM/YYYY-MM-DD.md` (`journal/` is its own git repo → private GitHub remote) | only the `anima-journal-digest` scheduled agent, per this contract | quote-don't-paraphrase (audited), past day files immutable |
 | Index | `journal/index.md` | the digest agent | one line per day file, newest first |
 
 **If you are an interactive agent** (not the digest): you do not write
@@ -24,7 +24,7 @@ the raw layer or any day file; corrections happen through the digest.
 ```markdown
 # YYYY-MM-DD — <short slug for the day's dominant theme>
 
-Compiled: <ISO timestamp> by imago-journal-digest
+Compiled: <ISO timestamp> by anima-journal-digest
 Sources: raw/2026-09-23.jsonl (L1–L58)
 Sessions: <session-id-1>, <session-id-2>
 Public-safe: yes | no | unclear   (if not yes — one line saying what and why)
@@ -91,11 +91,19 @@ Nightly-agent activity, failures, fixes — one line each, cited.
    date, the digest extends that day file with an
    `## Addendum (compiled later)` section and extends its `Sessions:` line;
    existing backfill text stays untouched.
+9. **Section titles are load-bearing.** The exact header
+   `## User rationale (verbatim)` is reserved for raw-cited quotes and is
+   the only section the audit parses. Backfill material titles its section
+   `## User rationale (verbatim, pre-capture)` — corpus/git/session-record
+   citations the audit cannot verify, so deliberately not audit-parsed. A
+   day file that began as backfill and later received raw lines carries
+   both: the pre-capture section keeps its title, and the addendum gets the
+   exact-titled one.
 
 ## Digest operating procedure
 
 1. `python3 scripts/journal_audit.py --dump` — prints uncompiled raw lines
-   (per the cursor in `.imago/journal/state.json`) with line numbers.
+   (per the cursor in `.anima/journal/state.json`) with line numbers.
 2. Nothing pending → one-line "no new activity" nightly report, stop.
 3. Compile one day file per affected date per the template; update
    `journal/index.md`.

@@ -12,7 +12,7 @@ spend that makes it citable.
 
 ## Shape (rough until triaged)
 
-- Price it first from `imago metrics` (pilot economics × 3) — the telemetry
+- Price it first from `anima metrics` (pilot economics × 3) — the telemetry
   exists precisely for this decision.
 - Only worth running on a stable, non-congested endpoint or a paid pin;
   record the pin switch vs the pilot waves.
@@ -27,4 +27,4 @@ spend that makes it citable.
 
 ## Migrated
 
-Imported as GitHub issue #10 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #10 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

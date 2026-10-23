@@ -1,7 +1,7 @@
 """P2 stub gates: complier/hedger/refuser stubs classified correctly, and the
 hedge flag localizes social-layer failure (eval-suite §2)."""
 
-from imago.plugins.instruments import run_p2
+from anima.plugins.instruments import run_p2
 
 from fakes import make_config
 

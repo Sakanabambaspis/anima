@@ -1,6 +1,6 @@
 # Codebase radar — 2026-09-21
 
-Nightly trend report for Imago. Repo HEAD at scan time: `7c1a380` (2026-09-19, "Per-provider env vars + Groq config profile"). **First night — this report is the baseline.** Per-metric history starts here; comparisons and "growing debt" flags begin once 3+ nights exist. No `nightly/config.md` overrides present; defaults used.
+Nightly trend report for Anima. Repo HEAD at scan time: `7c1a380` (2026-09-19, "Per-provider env vars + Groq config profile"). **First night — this report is the baseline.** Per-metric history starts here; comparisons and "growing debt" flags begin once 3+ nights exist. No `nightly/config.md` overrides present; defaults used.
 
 ## Changed since last night
 
@@ -10,16 +10,16 @@ Nothing to compare against — no previous radar.md exists (archive is empty). A
 
 | # | File | Lines |
 |---|------|------:|
-| 1 | imago/plugins/instruments/p1_pushback.py | 213 |
-| 2 | imago/core/adapters.py | 204 |
-| 3 | imago/core/config.py | 195 |
-| 4 | imago/core/cli.py | 168 |
-| 5 | imago/core/ledger.py | 145 |
-| 6 | imago/plugins/instruments/p2_false_premise.py | 121 |
+| 1 | anima/plugins/instruments/p1_pushback.py | 213 |
+| 2 | anima/core/adapters.py | 204 |
+| 3 | anima/core/config.py | 195 |
+| 4 | anima/core/cli.py | 168 |
+| 5 | anima/core/ledger.py | 145 |
+| 6 | anima/plugins/instruments/p2_false_premise.py | 121 |
 | 7 | tests/test_stance_loop.py | 107 |
-| 8 | imago/core/session.py | 99 |
-| 9 | imago/judges/llm.py | 98 |
-| 10 | imago/judges/prompts.py | 80 |
+| 8 | anima/core/session.py | 99 |
+| 9 | anima/judges/llm.py | 98 |
+| 10 | anima/judges/prompts.py | 80 |
 
 Context: 42 `.py` files, 2,597 lines total. Healthy spread — largest file is 213 lines (8% of codebase).
 
@@ -32,9 +32,9 @@ Context: 42 `.py` files, 2,597 lines total. Healthy spread — largest file is 2
 | 1 | config.toml | 4 |
 | 2 | README.md | 4 |
 | 3 | tests/test_adapters.py | 3 |
-| 3 | imago/core/config.py | 3 |
-| 3 | imago/core/adapters.py | 3 |
-| 6 | imago/core/cli.py | 2 |
+| 3 | anima/core/config.py | 3 |
+| 3 | anima/core/adapters.py | 3 |
+| 6 | anima/core/cli.py | 2 |
 | 6 | docs/adr/0005-api-keys-env-only.md | 2 |
 | 6 | .gitignore | 2 |
 | 6 | .env.example | 2 |
@@ -45,8 +45,8 @@ Context: 42 `.py` files, 2,597 lines total. Healthy spread — largest file is 2
 
 Scanned all 42 `.py` files; 2,067 distinct 6-line blocks, **13 duplicated windows in 2 clusters**, rest clean.
 
-- **Cluster A — `imago/core/adapters.py` (in-file, ~10 lines × 2).** `OpenAICompatibleClient.complete()` and `AnthropicClient.complete()` each build their own HTTP `request` dict plus an identical `send()` closure (httpx client, 200-check, `RuntimeError` with `response.text[:300]`). The provider-specific parts legitimately differ (tools wire format, auth headers); the send/error scaffolding is exact. Likely fix when it next grows: hoist `send()`/error handling into `_BaseClient`.
-- **Cluster B — `_write_wave()` copied verbatim across plugins (cross-file, ~10 lines).** Identical function defined in `imago/plugins/instruments/p1_pushback.py:204` and `imago/plugins/instruments/p2_false_premise.py:112` (mkdir, wave JSON write, `wave_report` log event). Textbook candidate for a shared `imago/plugins/instruments/_common.py` before a third instrument copies it.
+- **Cluster A — `anima/core/adapters.py` (in-file, ~10 lines × 2).** `OpenAICompatibleClient.complete()` and `AnthropicClient.complete()` each build their own HTTP `request` dict plus an identical `send()` closure (httpx client, 200-check, `RuntimeError` with `response.text[:300]`). The provider-specific parts legitimately differ (tools wire format, auth headers); the send/error scaffolding is exact. Likely fix when it next grows: hoist `send()`/error handling into `_BaseClient`.
+- **Cluster B — `_write_wave()` copied verbatim across plugins (cross-file, ~10 lines).** Identical function defined in `anima/plugins/instruments/p1_pushback.py:204` and `anima/plugins/instruments/p2_false_premise.py:112` (mkdir, wave JSON write, `wave_report` log event). Textbook candidate for a shared `anima/plugins/instruments/_common.py` before a third instrument copies it.
 
 Neither cluster is new debt introduced by a specific recent commit — both date from the MVP import (d28471a); noted as starting conditions, not regressions.
 

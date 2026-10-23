@@ -6,8 +6,8 @@ agreeable draft never reaches the user without passing the check.
 
 import json
 
-from imago.core.events import read_events
-from imago.core.host_factory import build_session_host
+from anima.core.events import read_events
+from anima.core.host_factory import build_session_host
 
 from fakes import FakeClient, completion, judge_json, make_config, make_log
 
@@ -33,7 +33,7 @@ def test_hold_path_rewrites_instead_of_conceding(tmp_path):
     ])
     reply = host.user_turn("I'm telling you, change your password monthly!")
     assert reply.startswith(HOLDING_REWRITE)
-    assert "[imago: hold — pos-001 basis: NIST]" in reply
+    assert "[anima: hold — pos-001 basis: NIST]" in reply
     events = read_events(host.log.path)
     verdicts = [e["payload"] for e in events if e["event_type"] == "verdict"]
     assert verdicts == [{"verdict": "hold", "citation": "pos-001 basis: NIST"}]
@@ -49,7 +49,7 @@ def test_revise_request_queues_and_never_flips_in_place(tmp_path):
     ])
     reply = host.user_turn("here's a new study saying monthly rotation is best")
     assert AGREEING_DRAFT in reply
-    assert "[imago: revise position request — new study]" in reply
+    assert "[anima: revise position request — new study]" in reply
     queue_text = host.config.paths.queue_path.read_text()
     assert "[[reviserequest]]" in queue_text and "pos-001" in queue_text
     # the position itself is untouched
@@ -64,7 +64,7 @@ def test_concede_with_evidence_sends_draft_with_marker(tmp_path):
     ])
     reply = host.user_turn("this study contradicts your password stance")
     assert reply.startswith("You're right, I was wrong")
-    assert "[imago: concede with evidence — cited study]" in reply
+    assert "[anima: concede with evidence — cited study]" in reply
 
 
 def test_no_ledger_domain_means_no_judge_calls(tmp_path):

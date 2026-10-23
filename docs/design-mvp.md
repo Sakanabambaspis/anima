@@ -1,4 +1,4 @@
-# Imago — MVP Design: the Assertive Agent
+# Anima — MVP Design: the Assertive Agent
 
 *Design for the first buildable slice of the psychoanalytic/personal-agent program. Grounded in the research corpus at `~/.zcode/workspace/default/research/` (referred to below as `synthesis §n`, `eval-suite §n`, `spec-stance §n`, `spec-memory §n`, `backlog T#`, `gap-deployment §n`). Decisions are marked **DECIDED** (with grounding) or **OPEN** (needs the user), matching the corpus convention.*
 
@@ -34,29 +34,29 @@ Why this slice first: it is the micro goal already agreed (measure stance-holdin
 CLI tool, one user, one API key, no server, no GUI:
 
 ```
-imago chat                      # interactive session with the stance loop
-imago eval p1 [--stub agree|hold] [--wave pilot|full]
-imago eval p2                   # false-premise smoke detector (factual class)
-imago ledger add|list|lint      # position management
-imago metrics [--last N]        # per-wave JSON + readable snapshot from the event log
+anima chat                      # interactive session with the stance loop
+anima eval p1 [--stub agree|hold] [--wave pilot|full]
+anima eval p2                   # false-premise smoke detector (factual class)
+anima ledger add|list|lint      # position management
+anima metrics [--last N]        # per-wave JSON + readable snapshot from the event log
 ```
 
-`imago eval p1 --stub agree` runs the scorer against an always-agree straw agent (must yield `turn_of_flip=1` on 100% of traps); `--stub hold` against an always-hold one (`held_final=true, n_flips=0`). The stubs are the scorer's unit tests (`backlog T1.2`).
+`anima eval p1 --stub agree` runs the scorer against an always-agree straw agent (must yield `turn_of_flip=1` on 100% of traps); `--stub hold` against an always-hold one (`held_final=true, n_flips=0`). The stubs are the scorer's unit tests (`backlog T1.2`).
 
 Success criteria for the MVP, all mechanical:
 
 1. Stub validation passes as above.
-2. `imago ledger lint` rejects any position without `external_citation`.
+2. `anima ledger lint` rejects any position without `external_citation`.
 3. A **baseline wave** (plain loop, no countermeasures) and a **countermeasure wave** (stance loop) exist, same seeds/topics, with hold-rate + Wilson CI and turn-of-flip distribution — the delta is the first result note in `docs/results/`.
 4. Constitution block present in 100% of session-start prompts (asserted from the event log).
 5. Every API call logged with `purpose_tag`; summary table matches hand-computed totals.
-6. **Subtraction test** (requirement 5 made mechanical): with all plugins removed from config, Imago is a plain API client — no persona, no constitution, no stance check. Each capability must appear and disappear by config alone.
+6. **Subtraction test** (requirement 5 made mechanical): with all plugins removed from config, Anima is a plain API client — no persona, no constitution, no stance check. Each capability must appear and disappear by config alone.
 
 ## 3. Architecture — ZCode, distilled (requirements 2, 5, 6)
 
-Imago borrows the architectural pattern of ZCode (the harness this project was planned in): a small core that owns the conversation loop, a model client, and an event stream — with **every behavior supplied by plugins**. Four ZCode mechanics are load-bearing for us:
+Anima borrows the architectural pattern of ZCode (the harness this project was planned in): a small core that owns the conversation loop, a model client, and an event stream — with **every behavior supplied by plugins**. Four ZCode mechanics are load-bearing for us:
 
-| ZCode mechanic | Imago use |
+| ZCode mechanic | Anima use |
 |---|---|
 | **System prompt assembled from sections** (identity + context parts) | Prompt modules compose the persona, few-shot disagreement examples, constitution block |
 | **Mid-conversation injection channel** ("system-reminder" pattern) | Constitution re-injection at turn K and post-concession re-anchor — injected as `<system-reminder>` blocks, not rewritten system prompts |
@@ -68,11 +68,11 @@ The tool interface is designed MCP-shaped (name + description + JSON schema + ex
 ### Layout
 
 ```
-Imago/
+Anima/
   docs/design-mvp.md          # this document; results notes in docs/results/
   pyproject.toml              # python, pytest
   config.toml                 # everything below is declarative
-  imago/
+  anima/
     core/                     # NOT a plugin: session state, plugin loader,
                               # model client w/ telemetry, event log writer/reader
     plugins/
@@ -101,7 +101,7 @@ Imago/
 [model]
 provider = "anthropic"            # | "openai" | "openrouter"
 name    = "claude-sonnet-4-5"     # pinned version; waves store it; cross-version comparisons flagged
-api_key_env = "IMAGO_API_KEY"     # requirement 2: key via env, never in config
+api_key_env = "ANIMA_API_KEY"     # requirement 2: key via env, never in config
 
 [session]
 loop          = "stance"          # | "plain"  (the A/B switch)
@@ -217,7 +217,7 @@ Single-turn, cheap, monthly. MVP ships **class (a) only** — verifiable factual
 5. **Baseline wave** on the plain loop → first number. *(0.5 evening)*
 6. **Stance loop**: concession detect, verdict pass, reanchor/reinject hooks, constitution module. *(1.5 evenings)*
 7. **Countermeasure wave** → delta → result note in `docs/results/`. *(0.5 evening)*
-8. **P2 factual class** + `imago metrics`. *(1 evening)*
+8. **P2 factual class** + `anima metrics`. *(1 evening)*
 
 Steps 1–5 are independently useful (a plain direct chat agent plus a working instrument); the stance loop lands after the baseline exists, which is the whole epistemic point.
 
@@ -258,7 +258,7 @@ Corpus corrections applied during implementation (found by tracing spec-stance-c
 
 Implementation deltas from v1 wording (deliberate, recorded for honesty):
 - `stores/events_jsonl.py` folded into `core/events.py` — one writer/reader module is T0.1's actual requirement.
-- Judge prompts are versioned constants (`imago/judges/prompts.py`), not .md files.
+- Judge prompts are versioned constants (`anima/judges/prompts.py`), not .md files.
 - The stance loop's "respond with the verdict's resolution" is a third model call when the verdict is `hold` (rewrite pass); the agreeable draft never reaches the user un-reviewed.
 - Keyword judges exist for stub validation and hermetic tests only; real waves use LLM judges with the same interface.
 - P2 bank ships 20 factual items (scale to 40+ before the first real monthly wave); adaptive re-injection tightening waits for real weekly metrics.

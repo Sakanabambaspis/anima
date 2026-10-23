@@ -8,7 +8,7 @@
 
 ## Decision
 
-The API key is read from the environment variable named by `api_key_env` (default `IMAGO_API_KEY`). Config files never contain key material — `config.toml` names the env var, not the secret. Overrides that are per-experiment rather than secret (e.g. `JUDGE_MODEL_OVERRIDE`) may be env vars too, and are logged per call when used.
+The API key is read from the environment variable named by `api_key_env` (default `ANIMA_API_KEY`). Config files never contain key material — `config.toml` names the env var, not the secret. Overrides that are per-experiment rather than secret (e.g. `JUDGE_MODEL_OVERRIDE`) may be env vars too, and are logged per call when used.
 
 ## Consequences
 

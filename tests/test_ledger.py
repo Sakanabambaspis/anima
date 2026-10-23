@@ -1,6 +1,6 @@
 """Ledger gates: lint rules and deterministic domain matching."""
 
-from imago.core.ledger import (append_revision_request, load_positions,
+from anima.core.ledger import (append_revision_request, load_positions,
                                lint_positions, lint_trap_topics,
                                match_positions)
 

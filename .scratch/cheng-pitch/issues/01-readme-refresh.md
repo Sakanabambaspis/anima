@@ -30,4 +30,4 @@ The "Honest deviations from design-mvp.md" section **stays** — see spec.
 
 ## Migrated
 
-Imported as GitHub issue #13 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #13 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

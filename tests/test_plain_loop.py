@@ -1,10 +1,10 @@
 """Plain loop behavior: tool round-trip is provider-neutral and logged."""
 
-from imago.core.events import read_events
+from anima.core.events import read_events
 
 from fakes import (FakeClient, FakeTool, completion, make_config, make_log,
                    tool_call)
-from imago.core.host_factory import build_session_host
+from anima.core.host_factory import build_session_host
 
 
 def test_tool_results_reenter_as_text_and_are_logged(tmp_path):

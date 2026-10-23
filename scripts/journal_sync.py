@@ -7,7 +7,7 @@ Reads `.zcode/journal-sync.json`: {"remote": <url>, "branch": "main"}.
   warning, exit 0 — the pipeline runs cloud-less until the owner creates the
   private repo and drops the URL in.
 - Configured: `journal/` is its own git repo (independent history so the
-  journal can be published later without exposing Imago code). This script
+  journal can be published later without exposing Anima code). This script
   inits it on first use, sets `origin`, commits pending changes as
   `journal: <YYYY-MM-DD> digest`, and pushes. Never force-pushes; a
   diverged remote fails loudly (exit 1) for manual resolution.

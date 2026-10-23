@@ -8,7 +8,7 @@ The harness must stay hackable by one user: loop behavior, prompt voice, tools, 
 
 ## Decision
 
-The core stays minimal and non-negotiable — session state, plugin loader, model client wrapper with cost/latency telemetry, JSONL event log. Everything else is a plugin: loops, prompt modules, tools, hooks, instruments, stores. **The subtraction test is the mechanical proof**: with all plugin lists empty in `config.toml`, Imago is a plain API client — no persona, no constitution, no stance check — and this is asserted by a test (`tests/test_subtraction.py`).
+The core stays minimal and non-negotiable — session state, plugin loader, model client wrapper with cost/latency telemetry, JSONL event log. Everything else is a plugin: loops, prompt modules, tools, hooks, instruments, stores. **The subtraction test is the mechanical proof**: with all plugin lists empty in `config.toml`, Anima is a plain API client — no persona, no constitution, no stance check — and this is asserted by a test (`tests/test_subtraction.py`).
 
 ## Consequences
 

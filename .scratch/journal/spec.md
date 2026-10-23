@@ -1,6 +1,6 @@
 # Spec: journal — the dev-process journal pipeline
 
-**Track: INFRA.** No code work in the `imago/` package (subtraction test and
+**Track: INFRA.** No code work in the `anima/` package (subtraction test and
 MVP scope untouched).
 
 ## Goal
@@ -15,7 +15,7 @@ is logged automatically.
 ```
 prompts ──► [ZCode hooks: UserPromptSubmit + Stop]     mechanical, live
                  ▼
-        .imago/journal/raw/YYYY-MM-DD.jsonl    local-only (gitignored), append-only
+        .anima/journal/raw/YYYY-MM-DD.jsonl    local-only (gitignored), append-only
                  ▼ daily 07:30, cursor-scanned
         [journal-digest scheduled agent]
                  ▼ compiles per docs/agents/journal.md, audits, syncs
@@ -53,9 +53,9 @@ contract-bound to quote the owner with citations that a script verifies.
 
 Automation registration (CronCreate, daily 07:30) happens only after 01–04
 verify. Scheduled-task spec joins
-`~/.zcode/workspace/default/imago-scheduled-tasks.md` in house format.
+`~/.zcode/workspace/default/anima-scheduled-tasks.md` in house format.
 
 ## Non-goals
 
 Public-publication flow · full transcript copying · journaling inside the
-`imago/` package · search UI · weekly/monthly digests.
+`anima/` package · search UI · weekly/monthly digests.

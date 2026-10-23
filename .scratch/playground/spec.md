@@ -1,7 +1,7 @@
 # Spec: playground — R&D chat tool, independent of the product
 
 **Track: TOOLING.** Not a product, not a pivot. A workshop for developing and
-debugging Imago itself. Decided 2026-09-23 after the "build an LLM playground
+debugging Anima itself. Decided 2026-09-23 after the "build an LLM playground
 instead" alternative was evaluated and rejected as a product replacement
 (contradicts ADR-0001); this spec records the accepted narrow version.
 
@@ -10,14 +10,14 @@ instead" alternative was evaluated and rejected as a product replacement
 Interactive, multi-session chat for development work the batch runners can't
 do: reproduce a judge misfire conversationally, hand-probe verdict prompts /
 profiles / constitution modules before freezing them in a wave, poke the real
-API path between hermetic runs. The instrument (`imago eval`) stays the only
+API path between hermetic runs. The instrument (`anima eval`) stays the only
 source of numbers; the playground produces impressions, never results.
 
 ## Independence rules (binding)
 
-- Lives outside `imago/` (e.g. a top-level `playground/`). Product code never
-  imports it; nothing in `imago/` may change to serve it.
-- One-way dependency: `playground → imago.core` (`host_factory`, `config`,
+- Lives outside `anima/` (e.g. a top-level `playground/`). Product code never
+  imports it; nothing in `anima/` may change to serve it.
+- One-way dependency: `playground → anima.core` (`host_factory`, `config`,
   `adapters`). The subtraction test must keep passing untouched.
 - Its tickets never block `cheng-dev 01→07` or the `cheng-pitch` email.
   Default sequencing: after the email, alongside the 08–11 runway, unless the
@@ -28,7 +28,7 @@ source of numbers; the playground produces impressions, never results.
 
 - Multiple named chat sessions, resumable. Build on the event log and `run_id`
   that already exist; do not invent a second storage layer.
-- Per-session behavior comes from an Imago config: system prompt (prompt
+- Per-session behavior comes from an Anima config: system prompt (prompt
   modules + constitution), profile, loop choice, tool access — the same knobs
   as `config.toml`, no parallel configuration system.
 - Everything else — web UI, provider management, tool-schema editors, sharing,
@@ -39,5 +39,5 @@ source of numbers; the playground produces impressions, never results.
 ## Non-goals
 
 - No product features, no scoring, no wave logic, no GUI by default.
-- No changes to `imago/` to accommodate it (if a change seems needed, that is
+- No changes to `anima/` to accommodate it (if a change seems needed, that is
   a `revise_position_request` against this spec, not a quiet edit).

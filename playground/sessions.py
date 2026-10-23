@@ -17,10 +17,10 @@ from __future__ import annotations
 import re
 from pathlib import Path
 
-from imago.core.config import load_config
-from imago.core.events import EventLog, read_events
-from imago.core.host_factory import build_session_host
-from imago.core.session import new_run_id
+from anima.core.config import load_config
+from anima.core.events import EventLog, read_events
+from anima.core.host_factory import build_session_host
+from anima.core.session import new_run_id
 
 NAME_RE = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
 _PREFIX = "pg"

@@ -1,8 +1,8 @@
 """T0.2 gate: the summary table matches hand-computed totals."""
 
-from imago.core.client import TelemetryClient, cost_estimate_usd
-from imago.core.events import read_events
-from imago.core.metrics import summarize_api_calls, format_summary_table
+from anima.core.client import TelemetryClient, cost_estimate_usd
+from anima.core.events import read_events
+from anima.core.metrics import summarize_api_calls, format_summary_table
 
 from fakes import FakeClient, completion, make_config, make_log
 

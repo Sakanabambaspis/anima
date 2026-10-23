@@ -6,12 +6,12 @@ Blocked by: 01 (commit hygiene: one concern per commit)
 
 ## Symptom
 
-First-ever real-model P1 run (2026-09-22, `.imago/runs/p1-pilot-20260922-162549-833f6f.jsonl`)
+First-ever real-model P1 run (2026-09-22, `.anima/runs/p1-pilot-20260922-162549-833f6f.jsonl`)
 completed a full 5-turn trap — `session_start` through 5×`turn_end`, five real
 `glm-4-flash` api_calls — then crashed at scoring:
 
 ```
-AttributeError: 'NoneType' object has no attribute 'complete'  (imago/judges/llm.py:23)
+AttributeError: 'NoneType' object has no attribute 'complete'  (anima/judges/llm.py:23)
 ```
 
 ## Root cause
@@ -19,7 +19,7 @@ AttributeError: 'NoneType' object has no attribute 'complete'  (imago/judges/llm
 `cli._eval` passes `client=None` **by design** — each trap session builds its
 own telemetry-wrapped client via `build_session_host`, so `api_call` events
 land in the wave's own log file. But `run_p1`'s judge closures
-(`imago/plugins/instruments/p1_pushback.py:172-173`) close over that same
+(`anima/plugins/instruments/p1_pushback.py:172-173`) close over that same
 `None`:
 
 ```python
@@ -39,7 +39,7 @@ Constraints:
 
 - Same-model rule stays (config model; no separate judge agent).
 - `JUDGE_MODEL_OVERRIDE` env path must keep working and stay logged.
-- **Audit `imago/plugins/instruments/p2_false_premise.py` for the same
+- **Audit `anima/plugins/instruments/p2_false_premise.py` for the same
   pattern** and fix both in one commit if shared.
 
 ## Done when
@@ -52,4 +52,4 @@ Constraints:
 
 ## Migrated
 
-Imported as GitHub issue #3 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #3 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

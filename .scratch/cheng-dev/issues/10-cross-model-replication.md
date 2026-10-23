@@ -27,4 +27,4 @@ measure across models is the kind of result an evaluation lab reads.
 
 ## Migrated
 
-Imported as GitHub issue #11 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #11 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

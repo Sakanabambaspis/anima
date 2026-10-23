@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""Imago project journal — capture hook.
+"""Anima project journal — capture hook.
 
 Appends one JSON line per fired ZCode hook event to the raw journal layer
-(`.imago/journal/raw/YYYY-MM-DD.jsonl`). Registered for `UserPromptSubmit`
+(`.anima/journal/raw/YYYY-MM-DD.jsonl`). Registered for `UserPromptSubmit`
 (the user's prompts, verbatim — this is the design-rationale evidence) and
 `Stop` (turn-end markers) in `.zcode/config.json`.
 
@@ -105,7 +105,7 @@ def _last_assistant_text(transcript_path):
 
 def _append(root, record):
     now = datetime.now().astimezone()
-    raw_dir = os.path.join(root, ".imago", "journal", "raw")
+    raw_dir = os.path.join(root, ".anima", "journal", "raw")
     os.makedirs(raw_dir, exist_ok=True)
     path = os.path.join(raw_dir, now.strftime("%Y-%m-%d") + ".jsonl")
     line = json.dumps(record, ensure_ascii=False)

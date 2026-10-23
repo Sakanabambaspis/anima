@@ -9,7 +9,7 @@ Blocked by: 03
 Owner decision (2026-09-23): compiled journal syncs to a **private** GitHub
 repo; raw stays local-only; flipping the cloud copy public is a manual owner
 decision. `journal/` is deliberately a standalone git repo (gitignored by
-imago) so journal history and code history never couple.
+anima) so journal history and code history never couple.
 
 ## What
 
@@ -44,4 +44,4 @@ still owes: create the private GitHub repo and drop the URL into
 
 ## Migrated
 
-Imported as GitHub issue #18 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #18 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

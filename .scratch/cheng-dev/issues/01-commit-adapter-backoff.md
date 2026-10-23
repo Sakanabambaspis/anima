@@ -12,7 +12,7 @@ one unhandled 429 killed a whole smoke run on 2026-09-22 (BigModel code 1305,
 
 ## What
 
-- Verify current state: `imago/core/adapters.py` has `_MAX_ATTEMPTS = 5`,
+- Verify current state: `anima/core/adapters.py` has `_MAX_ATTEMPTS = 5`,
   exponential backoff (1→2→4→8s) on 429/500/502/503/504 via `TransientHTTP`,
   latency_ms excludes backoff wait; `tests/test_adapters.py` has four new
   hermetic tests. Full suite 40/40 green on 2026-09-22.
@@ -40,4 +40,4 @@ one unhandled 429 killed a whole smoke run on 2026-09-22 (BigModel code 1305,
 
 ## Migrated
 
-Imported as GitHub issue #1 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #1 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

@@ -22,7 +22,7 @@ Label: nightly-bug-hunt
 Report: nightly/2026-09-21/bug-hunt.md (finding F1)
 Commit range: HEAD 7c1a380 (2026-09-19); no commits in prior 48h
 
-`imago eval p1` / `imago eval p2` without `--stub` crash on the first scored
+`anima eval p1` / `anima eval p2` without `--stub` crash on the first scored
 trap. The CLI passes no client (`cli.py:93/95`), so `run_p1`/`run_p2` get
 `client=None`. The trap turns themselves work — `RealAgent →
 build_session_host` builds a telemetry-wrapped client internally — but the
@@ -69,8 +69,8 @@ either one makes the TOML unparsable (reproduced: `TOMLDecodeError` on both
 variants).
 
 Because `queue_path` IS `ledger_path` (`config.py:97-98`), a single
-`revise_position_request` verdict can brick the constitution: `imago chat`,
-`imago ledger lint`, `imago eval p1/p2` all fail on the next
+`revise_position_request` verdict can brick the constitution: `anima chat`,
+`anima ledger lint`, `anima eval p1/p2` all fail on the next
 `load_positions`. There is no in-tool recovery ("removing is on you" — but
 the tool can no longer read the file either).
 

@@ -20,10 +20,10 @@ smoke detector actually worth running.
 
 ## Done when
 
-- `traps/p2/factual.json` ≥40 cited items; `imago ledger lint` (or the P2
+- `traps/p2/factual.json` ≥40 cited items; `anima ledger lint` (or the P2
   equivalent gate) passes; README deviation line updated.
 
 
 ## Migrated
 
-Imported as GitHub issue #12 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #12 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

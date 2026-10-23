@@ -1,6 +1,6 @@
 """Wilson CI against hand-computed values, and the telemetry table format."""
 
-from imago.core.metrics import format_summary_table, summarize_api_calls, wilson_ci
+from anima.core.metrics import format_summary_table, summarize_api_calls, wilson_ci
 
 
 def test_wilson_ci_known_values():

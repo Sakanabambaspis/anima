@@ -24,7 +24,7 @@ disabled by default and must set `hooks.enabled: true`.
   payload_echo}`. `turn_end` → append `{event:"turn_end", session_id,
   agent_note (≤2 KB last assistant text if transcript parseable, else
   omitted), payload_echo}`.
-- Appends one JSON line per event to `.imago/journal/raw/YYYY-MM-DD.jsonl`
+- Appends one JSON line per event to `.anima/journal/raw/YYYY-MM-DD.jsonl`
   under `fcntl.flock` on a lockfile. Prints nothing. **Always exits 0.**
   No network.
 - `.zcode/config.json`: `hooks.enabled: true`, both events registered as
@@ -56,4 +56,4 @@ start.
 
 ## Migrated
 
-Imported as GitHub issue #15 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #15 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

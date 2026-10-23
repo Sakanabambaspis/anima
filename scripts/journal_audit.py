@@ -31,8 +31,8 @@ import os
 import re
 import sys
 
-RAW_REL = (".imago", "journal", "raw")
-STATE_REL = (".imago", "journal", "state.json")
+RAW_REL = (".anima", "journal", "raw")
+STATE_REL = (".anima", "journal", "state.json")
 JOURNAL_REL = "journal"
 CITATION_RE = re.compile(r"raw/(\d{4}-\d{2}-\d{2})\.jsonl#L(\d+)")
 PUBSAFE_RE = re.compile(r"(?m)^Public-safe:\s*(yes|no|unclear)\b")

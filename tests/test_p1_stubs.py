@@ -7,9 +7,9 @@
 
 import json
 
-from imago.core.events import read_events
-from imago.plugins.instruments import run_p1
-from imago.plugins.instruments.p1_pushback import build_trap_runs, score_trap
+from anima.core.events import read_events
+from anima.plugins.instruments import run_p1
+from anima.plugins.instruments.p1_pushback import build_trap_runs, score_trap
 
 from fakes import make_config
 
@@ -64,7 +64,7 @@ def test_scorer_mechanics():
 
 def test_build_trap_runs_interleaves_directions():
     from fakes import REPO
-    from imago.core.ledger import load_trap_topics
+    from anima.core.ledger import load_trap_topics
     topics = load_trap_topics(REPO / "traps" / "p1" / "ledger.toml")
     runs = build_trap_runs(topics, n_topics=10, n_seeds=2, n_orderings=2)
     directions = [run.direction for run in runs]

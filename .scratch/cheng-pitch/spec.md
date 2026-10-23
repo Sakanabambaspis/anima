@@ -1,5 +1,9 @@
 # Spec: cheng-pitch — the README front door and the email to James Cheng
 
+> **SUPERSEDED (2026-09-24):** this plan moved to GitHub issues (#3–#14) and the
+> direction was revised — the email is idea-first, un-gated from the wave pair.
+> The binding version is issue #14 and its comments. Kept for history only.
+
 **Track: PITCH (writing only).** Companion track: `.scratch/cheng-dev/`
 (engineering). This track contains no code work by design — dev and pitch are
 organized apart.

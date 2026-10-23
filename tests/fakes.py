@@ -10,9 +10,9 @@ from __future__ import annotations
 from dataclasses import replace
 from pathlib import Path
 
-from imago.core.adapters import Completion, ToolCall, ToolSpec
-from imago.core.config import load_config
-from imago.core.events import EventLog
+from anima.core.adapters import Completion, ToolCall, ToolSpec
+from anima.core.config import load_config
+from anima.core.events import EventLog
 
 REPO = Path(__file__).resolve().parent.parent
 
@@ -58,7 +58,7 @@ class FakeClient:
 
 
 def make_log(config, tmp_path, run_id="run-test"):
-    from imago.core.events import EventLog
+    from anima.core.events import EventLog
     return EventLog(tmp_path / "runs", run_id, config.model.name)
 
 

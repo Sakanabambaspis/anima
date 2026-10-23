@@ -24,7 +24,7 @@ visibly labeled.
   Ops) + digest operating procedure (audit `--dump` → compile → audit
   `--advance` → sync → nightly report).
 - Digest job spec appended to
-  `~/.zcode/workspace/default/imago-scheduled-tasks.md` in house format:
+  `~/.zcode/workspace/default/anima-scheduled-tasks.md` in house format:
   daily 07:30 (after the 06:55 end of the night shift), hard deadline,
   nightly report + LATEST.md refresh.
 
@@ -37,11 +37,11 @@ visibly labeled.
 
 2026-09-23: Done. `docs/agents/journal.md` committed (template + 8 rules,
 including the backfill/addendum rule); job spec appended to
-`~/.zcode/workspace/default/imago-scheduled-tasks.md` as
-`imago-journal-digest` — daily 07:30, hard stop 08:30, after the night
+`~/.zcode/workspace/default/anima-scheduled-tasks.md` as
+`anima-journal-digest` — daily 07:30, hard stop 08:30, after the night
 shift ends. Automation registered via CronCreate same day.
 
 
 ## Migrated
 
-Imported as GitHub issue #16 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #16 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

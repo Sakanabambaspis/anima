@@ -1,8 +1,8 @@
 """The subtraction test (design-mvp §2, criterion 6): with plugins removed
-from config, Imago is a plain API client — no persona, no constitution, no
+from config, Anima is a plain API client — no persona, no constitution, no
 stance check. Capabilities appear and disappear by config alone."""
 
-from imago.core.host_factory import build_session_host
+from anima.core.host_factory import build_session_host
 
 from fakes import FakeClient, make_config, make_log
 
@@ -32,7 +32,7 @@ def test_bare_config_has_no_stance_check_and_no_hooks(tmp_path):
     assert len(client.calls) == 1
     assert client.calls[0]["purpose_tag"] == "task"
     types = [e["event_type"] for e in
-             __import__("imago.core.events", fromlist=["x"])
+             __import__("anima.core.events", fromlist=["x"])
              .read_events(host.log.path)]
     assert "concession_detected" not in types
     assert "verdict" not in types

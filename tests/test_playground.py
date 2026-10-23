@@ -1,14 +1,14 @@
 """Playground session bookkeeping: create/resume roundtrip, replay, guards.
 
 Hermetic like the rest of the suite — FakeClient answers the turns, and
-nothing here touches the network or modifies anything under imago/.
+nothing here touches the network or modifies anything under anima/.
 """
 
 from pathlib import Path
 
 import pytest
 
-from imago.core.events import read_events
+from anima.core.events import read_events
 
 from fakes import FakeClient, completion, make_config
 from playground.sessions import list_sessions, open_session, turn

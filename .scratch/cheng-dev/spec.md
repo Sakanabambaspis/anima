@@ -1,5 +1,9 @@
 # Spec: cheng-dev — engineering work before the project summary goes out
 
+> **SUPERSEDED (2026-09-24):** this plan moved to GitHub issues (#3–#14) and the
+> direction was revised — the email is idea-first, un-gated from the wave pair.
+> The binding version is issue #14 and its comments. Kept for history only.
+
 **Track: DEV.** Companion track: `.scratch/cheng-pitch/` (README + email —
 separate dir on purpose: dev work and pitch writing are organized apart).
 

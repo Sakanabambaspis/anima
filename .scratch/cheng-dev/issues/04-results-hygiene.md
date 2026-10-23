@@ -22,7 +22,7 @@ glm-4-flash) is an untracked scratch file in the tree — limbo.
 2. Decide `config.smoke.toml`: commit it as a documented smoke harness
    (recommended — ticket 05 uses it) **or** gitignore it. Either is fine;
    limbo is not. If committed, one README pointer line.
-3. Optional: the stub JSONLs in `.imago/runs/` are gitignored artifacts —
+3. Optional: the stub JSONLs in `.anima/runs/` are gitignored artifacts —
    leaving them is fine.
 
 ## Done when
@@ -33,4 +33,4 @@ glm-4-flash) is an untracked scratch file in the tree — limbo.
 
 ## Migrated
 
-Imported as GitHub issue #5 (`Sakanabambaspis/imago`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.
+Imported as GitHub issue #5 (`Sakanabambaspis/anima`) on 2026-09-24; that issue is canonical. This file is a frozen record — do not update it.

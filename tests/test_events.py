@@ -5,7 +5,7 @@ import json
 
 import pytest
 
-from imago.core.events import EventLog, SchemaViolation, read_events
+from anima.core.events import EventLog, SchemaViolation, read_events
 
 EVENTS = [
     ("session_start", "system", {"profile": "imperative", "loop": "stance",
